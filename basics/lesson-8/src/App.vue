@@ -2,7 +2,14 @@
 	<section>
 		<header><h1>My friends</h1></header>
 		<ul>
-			<friend-contact></friend-contact>
+			<friend-contact
+				v-for="friend in friends"
+				:key="friend.id"
+				:name="friend.name"
+				:phoneNumber="friend.phone"
+				:emailAddress="friend.email"
+				:isFavorite="friend.isFavorite ? '1' : '0'"
+			></friend-contact>
 		</ul>
 	</section>
 </template>
