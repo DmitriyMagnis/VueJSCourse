@@ -1,23 +1,35 @@
 <template>
 	<section>
 		<header><h1>My friends</h1></header>
+		<new-friend @add-friend="addFriend"></new-friend>
 		<ul>
 			<friend-contact
 				v-for="friend in friends"
 				:key="friend.id"
+				:id="friend.id"
 				:name="friend.name"
 				:phoneNumber="friend.phone"
 				:emailAddress="friend.email"
-				:isFavorite="friend.isFavorite ? '1' : '0'"
+				:isFavorite="friend.isFavorite"
+				@toggle-favorite="toggleFavoriteStatus"
 			></friend-contact>
 		</ul>
 	</section>
 </template>
 
 <script>
-import FriendContact from './components/FriendContact.vue';
 export default {
-	components: { FriendContact },
+	methods: {
+		addFriend(newFriend) {
+			this.friends.push(newFriend);
+		},
+		toggleFavoriteStatus(friendId) {
+			const friend = this.friends.find(f => f.id === friendId);
+			if (friend) {
+				friend.isFavorite = !friend.isFavorite;
+			}
+		},
+	},
 	data() {
 		return {
 			friends: [
@@ -26,12 +38,14 @@ export default {
 					name: 'John Doe',
 					phone: '123-456-7890',
 					email: 'aasdada@localhost.com',
+					isFavorite: true,
 				},
 				{
 					id: 2,
 					name: 'John Doe 2',
 					phone: '123-456-7890',
 					email: 'aasdada@localhost.com',
+					isFavorite: false,
 				},
 			],
 		};
@@ -70,7 +84,8 @@ header {
 	list-style: none;
 }
 
-#app li {
+#app li,
+#app form {
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
 	margin: 1rem auto;
 	border-radius: 10px;
@@ -102,5 +117,12 @@ header {
 	background-color: #ec3169;
 	border-color: #ec3169;
 	box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
+}
+#app form div {
+	margin: 0.5rem 0;
+}
+#app form label {
+	display: block;
+	margin-bottom: 0.2rem;
 }
 </style>
