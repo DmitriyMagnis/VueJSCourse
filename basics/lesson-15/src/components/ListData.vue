@@ -56,7 +56,7 @@ li {
 }
 .user-list-enter-to,
 .user-list-leave-from {
-  opacity: 1;
+  opacity: 1.2;
   transform: translateX(0);
 }
 .user-list-leave-to {
