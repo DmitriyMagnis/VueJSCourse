@@ -63,6 +63,7 @@ li {
   opacity: 1;
   transform: translateX(30px);
 }
+
 .user-list-move {
   transition: transform 0.3s ease;
 }
